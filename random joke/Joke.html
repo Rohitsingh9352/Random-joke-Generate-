@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Api</title>
+    <style>
+        /* HEADER */
+        *{
+            margin: 0;
+            padding: 0;
+            
+            background-color: black;
+        }
+
+        .head{
+            width: 100%;
+            height: 50px;
+            border-bottom: 3px dotted wheat;
+        }
+        .title{
+            width: 180px;
+            height: 90%;
+            margin: auto;
+        }
+        .title h1{
+            color: white;
+        }
+        /* JOKEBOX */
+        .container{
+            width: 80%;
+            margin: 50px auto;
+            color: white;
+        }
+        #joke{
+            color: white;
+            margin: 50px 30px;
+            width: 90%;
+            
+            text-align: center;
+            padding: 80px 0px 0px;
+        }
+        .btn-box{
+            width: 250px;
+            margin:20px auto;
+        }
+        button{
+            width: 120px ;
+            height: 40px;
+            
+            color: rgb(3, 3, 3);
+            border-radius: 5%;
+            background-color: white;
+             }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="head">
+        <div class="title"><h1>Funny Jokes</h1></div>
+    </div>
+    <!-- JOKEBOX -->
+    <div class="container">
+      <textarea  id="joke" cols="0" rows="10"></textarea>
+      <div class="btn-box">
+
+          <button type="button" id="copyBtn">COPY</button>
+          <button type="button" id="generateBtn">Generate New</button>
+        </div>
+
+    </div>
+    <script>
+        window.onload = () =>{
+            Jokes()
+        }
+        function Jokes(){
+            fetch("https://hindi-jokes-api.onrender.com/jokes?api_key=42733a84babdfa3b52da6b7be3d7")
+            .then(data => data.json())
+            .then(data => joke.innerHTML = data.jokeContent)
+            .catch(err=>console.log(err))
+
+    }
+    generateBtn.onclick = () =>{
+        Jokes()
+    }
+    copyBtn.onclick = () =>{
+        document.getElementById('joke').select();
+        
+        document.execCommand('copy');
+        alert('Text copied to clipboard');
+        
+
+    }
+    </script>
+</body>
+</html>
